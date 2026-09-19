@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1976d2">
+    <title>Customers - PharmaCare</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>⚕️ <a href="{{ url_for('home') }}">PharmaCare</a></h1>
+        <nav class="desktop-nav">
+            <a href="{{ url_for('home') }}">Dashboard</a>
+            <a href="{{ url_for('add_medicine') }}">Add Medicine</a>
+            <a href="{{ url_for('sales') }}">Sales & Billing</a>
+            <a href="{{ url_for('customers') }}" class="active">Customers</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>Customer Management</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="customer-layout">
+            <div>
+                <form method="POST" style="width: 100%;">
+                    <h3 style="color: #1976d2; margin-bottom: 15px; font-size: 18px;">Add Customer</h3>
+
+                    <label for="name">Customer Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter customer name" required>
+
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" inputmode="tel" placeholder="Enter phone number" required>
+
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Enter address">
+
+                    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                        <button type="submit" class="btn" style="flex: 1;">Add Customer</button>
+                        <a href="{{ url_for('home') }}" class="btn btn-secondary" style="flex: 1;">Dashboard</a>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom: 12px;">Customer Directory</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customerList">
+                            {% for customer in customers %}
+                            <tr>
+                                <td>#{{ customer.id }}</td>
+                                <td><strong>{{ customer.name }}</strong></td>
+                                <td><a href="tel:{{ customer.phone }}" style="color: #1976d2; text-decoration: none;">{{ customer.phone }}</a></td>
+                                <td>{{ customer.address or 'N/A' }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: #777; padding: 25px;">
+                                    No customers registered yet.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav">
+        <a href="{{ url_for('home') }}">
+            <span class="icon">📊</span>
+            <span>Dashboard</span>
+        </a>
+        <a href="{{ url_for('add_medicine') }}">
+            <span class="icon">➕</span>
+            <span>Add Med</span>
+        </a>
+        <a href="{{ url_for('sales') }}">
+            <span class="icon">🧾</span>
+            <span>Sales</span>
+        </a>
+        <a href="{{ url_for('customers') }}" class="active">
+            <span class="icon">👥</span>
+            <span>Customers</span>
+        </a>
+    </nav>
+</body>
+</html>

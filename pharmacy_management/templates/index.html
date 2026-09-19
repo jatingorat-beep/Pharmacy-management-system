@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1976d2">
+    <title>PharmaCare - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>⚕️ <a href="{{ url_for('home') }}">PharmaCare</a></h1>
+        <nav class="desktop-nav">
+            <a href="{{ url_for('home') }}" class="active">Dashboard</a>
+            <a href="{{ url_for('add_medicine') }}">Add Medicine</a>
+            <a href="{{ url_for('sales') }}">Sales & Billing</a>
+            <a href="{{ url_for('customers') }}">Customers</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <h2>Pharmacy Dashboard</h2>
+        <p class="subtitle">Manage medicines, track inventory, process billing, and view customers.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <section class="cards">
+            <div class="card">
+                <h3>Total Medicines</h3>
+                <p>{{ medicines|length }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Customers</h3>
+                <p>{{ total_customers }}</p>
+            </div>
+
+            <div class="card">
+                <h3>Total Sales</h3>
+                <p>₹{{ "%.2f"|format(total_sales) }}</p>
+            </div>
+
+            <div class="card">
+                <h3>System Status</h3>
+                <p style="color: #2e7d32; font-size: 22px;">● Active</p>
+            </div>
+        </section>
+
+        <section class="inventory">
+            <div class="section-header">
+                <h2>Medicine Inventory</h2>
+                <a class="btn" href="{{ url_for('add_medicine') }}">
+                    + Add Medicine
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Medicine Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for medicine in medicines %}
+                        <tr>
+                            <td>#{{ medicine.id }}</td>
+                            <td><strong>{{ medicine.name }}</strong></td>
+                            <td>{{ medicine.category }}</td>
+                            <td>₹{{ "%.2f"|format(medicine.price) }}</td>
+                            <td>
+                                {% if medicine.quantity <= 5 %}
+                                    <span class="badge-low">{{ medicine.quantity }} (Low)</span>
+                                {% else %}
+                                    {{ medicine.quantity }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="delete"
+                                   href="{{ url_for('delete_medicine', id=medicine.id) }}"
+                                   onclick="return confirm('Delete {{ medicine.name }}?')">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: #777; padding: 25px;">
+                                No medicines in inventory yet. <a href="{{ url_for('add_medicine') }}" style="color: #1976d2; font-weight: bold;">Add one now!</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav">
+        <a href="{{ url_for('home') }}" class="active">
+            <span class="icon">📊</span>
+            <span>Dashboard</span>
+        </a>
+        <a href="{{ url_for('add_medicine') }}">
+            <span class="icon">➕</span>
+            <span>Add Med</span>
+        </a>
+        <a href="{{ url_for('sales') }}">
+            <span class="icon">🧾</span>
+            <span>Sales</span>
+        </a>
+        <a href="{{ url_for('customers') }}">
+            <span class="icon">👥</span>
+            <span>Customers</span>
+        </a>
+    </nav>
+
+</body>
+</html>

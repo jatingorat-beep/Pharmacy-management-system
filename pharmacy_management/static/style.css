@@ -1,0 +1,526 @@
+/* Pharmacy Management System - Responsive & Mobile-Optimized */
+
+:root {
+    --primary-color: #1976d2;
+    --primary-hover: #125ca3;
+    --bg-color: #f4f7fb;
+    --card-bg: #ffffff;
+    --text-primary: #333333;
+    --text-muted: #666666;
+    --danger-color: #d32f2f;
+    --danger-hover: #b71c1c;
+    --success-color: #2e7d32;
+    --border-color: #e0e0e0;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.1);
+    --nav-height: 64px;
+    --bottom-nav-height: 60px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.3px;
+}
+
+header h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Desktop Navigation */
+
+nav.desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+nav.desktop-nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+nav.desktop-nav a:hover,
+nav.desktop-nav a.active {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+}
+
+/* Mobile Bottom Navigation Bar */
+
+.mobile-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+    z-index: 999;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mobile-bottom-nav a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #718096;
+    font-size: 11px;
+    font-weight: 600;
+    height: 100%;
+    transition: color 0.15s ease;
+}
+
+.mobile-bottom-nav a .icon {
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.mobile-bottom-nav a.active {
+    color: var(--primary-color);
+}
+
+.mobile-bottom-nav a:active {
+    background-color: #f1f5f9;
+}
+
+/* Main Container */
+
+main,
+.container {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 20px;
+}
+
+h2 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+p.subtitle {
+    margin-bottom: 24px;
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+/* Dashboard Metrics Cards */
+
+.dashboard,
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 20px 22px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card h3 {
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+}
+
+.card p {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1.2;
+}
+
+/* Section Header */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.section-header h2 {
+    margin-bottom: 0;
+}
+
+/* Buttons */
+
+button,
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    min-height: 46px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    user-select: none;
+}
+
+button:hover,
+.btn:hover {
+    background-color: var(--primary-hover);
+}
+
+button:active,
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background-color: #546e7a;
+}
+
+.btn-secondary:hover {
+    background-color: #37474f;
+}
+
+a.delete {
+    display: inline-flex;
+    align-items: center;
+    color: var(--danger-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 12px;
+    min-height: 34px;
+    border-radius: 6px;
+    border: 1px solid var(--danger-color);
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+a.delete:hover,
+a.delete:active {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+/* Forms */
+
+form,
+.medicine-form {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 520px;
+}
+
+.form-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+/* Mobile-Friendly Inputs (16px avoids iOS auto-zoom) */
+input,
+select {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 14px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: var(--text-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.18);
+}
+
+/* Responsive Grid Layouts */
+
+.two-col-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.customer-layout {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Tables & Responsive Wrapper */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    box-shadow: var(--shadow-sm);
+    margin-top: 14px;
+    margin-bottom: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+    min-width: 500px;
+}
+
+th,
+td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #edf2f7;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Alerts */
+
+.alert {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #a5d6a7;
+}
+
+.alert-error,
+.alert-danger {
+    background-color: #ffebee;
+    color: #b71c1c;
+    border: 1px solid #ef9a9a;
+}
+
+/* Billing specific box */
+
+.bill-total-box {
+    margin: 18px 0;
+    padding: 16px;
+    background-color: #e3f2fd;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.bill-total-box h2 {
+    margin-bottom: 0;
+    font-size: 20px;
+}
+
+/* Low stock badge */
+.badge-low {
+    display: inline-block;
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ----------------------------------------------------
+   Mobile & Tablet Responsive Media Queries
+---------------------------------------------------- */
+
+@media (max-width: 768px) {
+    body {
+        padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 15px) + 20px);
+    }
+
+    header {
+        padding: 14px 18px;
+    }
+
+    nav.desktop-nav {
+        display: none; /* Hidden on mobile; bottom nav is used */
+    }
+
+    .mobile-bottom-nav {
+        display: flex; /* Bottom bar active for easy single-thumb touch */
+    }
+
+    main,
+    .container {
+        padding: 0 14px;
+        margin: 18px auto;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    /* 2-column cards on tablets/phones */
+    .dashboard,
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .card h3 {
+        font-size: 11px;
+    }
+
+    .card p {
+        font-size: 22px;
+    }
+
+    /* Stack 2-column layouts */
+    .two-col-layout,
+    .customer-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    form,
+    .medicine-form {
+        padding: 18px;
+    }
+
+    .btn,
+    button {
+        width: 100%;
+    }
+
+    .section-header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .section-header .btn {
+        width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard,
+    .cards {
+        grid-template-columns: 1fr 1fr; /* Keep 2-column for compact metrics */
+    }
+
+    .card p {
+        font-size: 20px;
+    }
+
+    header h1 {
+        font-size: 19px;
+    }
+}
